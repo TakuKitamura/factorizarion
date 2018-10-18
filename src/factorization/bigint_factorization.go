@@ -48,7 +48,11 @@ func BigintPollardsRho(n big.Int) *big.Int {
 		return xxPlusOne.Mod(xxPlusOne, &n)
 	}
 
-	for d.Cmp(big.NewInt(1)) == 0 {
+	i := big.NewInt(0)
+	sqrt := new(big.Int).Sqrt(&n)
+	limit := sqrt.Sqrt(sqrt)
+
+	for d.Cmp(big.NewInt(1)) == 0 && i.Cmp(limit) == -1 {
 		x = f(x)
 		y = f(f(y))
 		z := big.NewInt(0)
@@ -58,7 +62,9 @@ func BigintPollardsRho(n big.Int) *big.Int {
 		} else {
 			z.Sub(y, x)
 		}
+
 		d = BigintGcd(*z, n)
+		i.Add(i, big.NewInt(1))
 	}
 
 	if d == &n {

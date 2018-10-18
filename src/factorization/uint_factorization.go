@@ -2,6 +2,7 @@ package factorization
 
 import (
 	"errors"
+	"fmt"
 	"math"
 	"math/big"
 	"strconv"
@@ -52,7 +53,7 @@ func UintPollardsRho(n uint64) uint64 {
 		return (x*x + 1) % n
 	}
 	// i := uint64(0)
-	// limit := uint64(math.Pow(float64(n), 0.05))
+	// limit := uint64(math.Pow(float64(n), 0.25))
 	// for d == 1 && i < limit {
 	x = f(x)
 	y = f(f(y))
@@ -65,6 +66,7 @@ func UintPollardsRho(n uint64) uint64 {
 	}
 
 	d = UintGcd(z, n)
+	fmt.Println(d)
 	// 	i += 1
 	// }
 	// fmt.Println(limit, i, 123)

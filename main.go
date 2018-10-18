@@ -30,6 +30,7 @@ func main() {
 	maxUint64 := new(big.Int).SetUint64(math.MaxUint64)
 
 	if bigInt.Cmp(maxUint64) == -1 {
+		fmt.Println("Type: Uint64")
 		uInt64, err := strconv.ParseUint(args[1], 10, 64)
 		if err != nil {
 			log.Fatal(err)
@@ -42,6 +43,7 @@ func main() {
 		}
 		fmt.Println(result)
 	} else {
+		fmt.Println("Type: BigInt")
 		result, err := factorization.BigintMain(*bigInt)
 		if err != nil {
 			log.Fatal(err)
