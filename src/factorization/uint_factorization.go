@@ -69,7 +69,6 @@ func UintPollardsRho(n uint64) uint64 {
 	fmt.Println(d)
 	// 	i += 1
 	// }
-	// fmt.Println(limit, i, 123)
 
 	if d == n {
 		return uint64(0)
