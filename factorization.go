@@ -85,7 +85,7 @@ func factoriz(x uint64) string {
 
 	for q >= d {
 		if x%d == 0 {
-			text += strconv.Itoa(int(d)) + " * "
+			text += strconv.FormatUint(d, 10) + " * "
 			x = q
 		} else {
 			d += 2
@@ -94,7 +94,7 @@ func factoriz(x uint64) string {
 		q = x / d
 	}
 
-	text += strconv.Itoa(int(x)) + " * "
+	text += strconv.FormatUint(x, 10) + " * "
 	return text
 }
 
@@ -119,14 +119,14 @@ func main() {
 		os.Exit(1)
 	}
 
-	text := "Factorization: " + strconv.Itoa(int(n)) + " = 1 * "
+	text := "Factorization: " + strconv.FormatUint(n, 10) + " = 1 * "
 
 	for {
 		d := pollards_rho(n)
 
 		if d == 0 || d == 1 {
 			if is_prime(n) == true {
-				text += strconv.Itoa(int(n)) + " * "
+				text += strconv.FormatUint(n, 10) + " * "
 			} else {
 				text += factoriz(n)
 			}
@@ -134,7 +134,7 @@ func main() {
 
 		} else {
 			if is_prime(d) == true {
-				text += strconv.Itoa(int(d)) + " * "
+				text += strconv.FormatUint(d, 10) + " * "
 			} else {
 				text += factoriz(d)
 			}
