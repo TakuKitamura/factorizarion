@@ -88,15 +88,15 @@ func factoriz(n big.Int) string {
 
 	q.Div(&x, d)
 
-	for q.Cmp(d) != -1 { //q >= d
-		if big.NewInt(0).Cmp(tempBigInt.Mod(&x, d)) == 0 { //x%d == 0
-			text += d.String() + " * "
-			x.Set(q)
-		} else {
-			d.Add(d, big.NewInt(2))
-		}
-		q.Div(&x, d)
+	// for q.Cmp(d) != -1 { //q >= d
+	if big.NewInt(0).Cmp(tempBigInt.Mod(&x, d)) == 0 { //x%d == 0
+		text += d.String() + " * "
+		x.Set(q)
+	} else {
+		d.Add(d, big.NewInt(2))
 	}
+	q.Div(&x, d)
+	// }
 
 	text += x.String() + " * "
 
