@@ -18,9 +18,9 @@ func UintIsPrime(n uint64) bool {
 		// pass
 	}
 
-	sn := math.Sqrt(float64(n))
+	sn := uint64(math.Sqrt(float64(n)))
 
-	for i := uint64(3); float64(i) <= sn; i += 2 {
+	for i := uint64(3); i <= sn; i += 2 {
 		if n%i == 0 {
 			return false
 		}
@@ -52,7 +52,7 @@ func UintPollardsRho(n uint64) uint64 {
 		return (x*x + 1) % n
 	}
 	// i := uint64(0)
-	// limit := uint64(math.Pow(float64(n), 0.25))
+	// limit := uint64(math.Pow(float64(n), 0.05))
 	// for d == 1 && i < limit {
 	x = f(x)
 	y = f(f(y))
@@ -67,6 +67,7 @@ func UintPollardsRho(n uint64) uint64 {
 	d = UintGcd(z, n)
 	// 	i += 1
 	// }
+	// fmt.Println(limit, i, 123)
 
 	if d == n {
 		return uint64(0)
@@ -101,14 +102,15 @@ func UintMain(n uint64) (string, error) {
 		err := errors.New("should be args[1] > 0.")
 		return "", err
 	}
+	buf := make([]byte, 0)
 
-	text := "Factorization: " + strconv.FormatUint(n, 10) + " = 1 * "
+	buf = append(buf, "Factorization: "+strconv.FormatUint(n, 10)+" = 1 * "...)
 
 	for {
 		d := UintPollardsRho(n)
 		if d < 2 {
 			if UintIsPrime(n) == true || n == 1 {
-				text += strconv.FormatUint(n, 10) + " * "
+				buf = append(buf, strconv.FormatUint(n, 10)+" * "...)
 				break
 			} else {
 				d = UintTrialDivision(n)
@@ -118,10 +120,11 @@ func UintMain(n uint64) (string, error) {
 				d = UintTrialDivision(d)
 			}
 		}
-		text += strconv.FormatUint(d, 10) + " * "
+		buf = append(buf, strconv.FormatUint(d, 10)+" * "...)
 		n = n / d
 
 	}
+	text := string(buf)
 	textLength := len(text) - 3
 	formula := text[:textLength]
 
