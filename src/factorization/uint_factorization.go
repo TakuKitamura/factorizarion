@@ -2,6 +2,7 @@ package factorization
 
 import (
 	"errors"
+	"fmt"
 	"math/big"
 	"strconv"
 )
@@ -85,12 +86,14 @@ func UintTrialDivision(x uint64) uint64 {
 
 	for q >= d {
 		if x%d == 0 {
+			// x = q
 			return d
+		} else {
+			d += 2
 		}
-		d += 2
 		q = x / d
 	}
-
+	fmt.Println(x)
 	return x
 }
 

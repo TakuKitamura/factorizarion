@@ -21,7 +21,7 @@ func BenchmarkUintPollardsRho(b *testing.B) {
 
 func BenchmarkUintTrialDivision(b *testing.B) {
 	b.ResetTimer()
-	for i := 0; i < 100000; i++ {
+	for i := 0; i < 100; i++ {
 		UintTrialDivision(uint64(i))
 	}
 }
