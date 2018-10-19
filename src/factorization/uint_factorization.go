@@ -2,7 +2,6 @@ package factorization
 
 import (
 	"errors"
-	"fmt"
 	"math"
 	"math/big"
 	"strconv"
@@ -66,7 +65,6 @@ func UintPollardsRho(n uint64) uint64 {
 	}
 
 	d = UintGcd(z, n)
-	fmt.Println(d)
 	// 	i += 1
 	// }
 
