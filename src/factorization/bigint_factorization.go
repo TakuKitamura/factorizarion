@@ -103,20 +103,22 @@ func BigintTrialDivision(n big.Int) *big.Int {
 	return &x
 }
 
-func BigintMain(n big.Int) (string, error) {
+func BigintMain(x big.Int) (string, error) {
+
+	n := *new(big.Int).Set(&x)
 
 	if n.Cmp(big.NewInt(1)) == -1 { //n < 1
 		err := errors.New("should be args[1] > 0.")
 		return "", err
 	}
-
-	text := "Factorization: " + n.String() + " = 1 * "
+	buf := make([]byte, 0)
+	buf = append(buf, "Factorization: "+n.String()+" = 1 * "...)
 
 	for {
 		d := BigintPollardsRho(n)
 		if d.Cmp(big.NewInt(2)) == -1 { // d < 2
 			if BigintIsPrime(n) == true || n.Cmp(big.NewInt(1)) == 0 {
-				text += n.String() + " * "
+				buf = append(buf, n.String()+" * "...)
 				break
 			} else {
 				d = BigintTrialDivision(n)
@@ -126,10 +128,10 @@ func BigintMain(n big.Int) (string, error) {
 				d = BigintTrialDivision(*d)
 			}
 		}
-		text += d.String() + " * "
+		buf = append(buf, d.String()+" * "...)
 		n.Div(&n, d)
 	}
-
+	text := string(buf)
 	textLength := len(text) - 3
 	formula := text[:textLength]
 
