@@ -12,17 +12,35 @@ func BigintIsPrime(n big.Int) bool {
 		return false
 	} else if n.Cmp(big.NewInt(2)) == 0 { //n == 2
 		return true
+	} else if n.Cmp(big.NewInt(3)) == 0 { //n == 3
+		return true
 	} else if big.NewInt(0).Cmp(tempBigInt.Mod(&n, big.NewInt(2))) == 0 { // n % 2 == 0
 		return false
+	} else if big.NewInt(0).Cmp(tempBigInt.Mod(&n, big.NewInt(3))) == 0 { // n % 2 == 0
+		return false
+	} else {
+		// pass
 	}
 
-	sn := new(big.Int).Sqrt(&n)
+	i := big.NewInt(5)
+	w := big.NewInt(2)
 
-	for i := big.NewInt(3); i.Cmp(sn) != 1; i = i.Add(i, big.NewInt(2)) { // i = 3; i <= sn; i+=2
+	for i.Mul(i, i).Cmp(&n) != 1 {
 		if big.NewInt(0).Cmp(tempBigInt.Mod(&n, i)) == 0 {
 			return false
+		} else {
+			i.Add(i, w)
+			w.Sub(big.NewInt(6), w)
 		}
 	}
+
+	// sn := new(big.Int).Sqrt(&n)
+
+	// for i := big.NewInt(3); i.Cmp(sn) != 1; i = i.Add(i, big.NewInt(2)) { // i = 3; i <= sn; i+=2
+	// 	if big.NewInt(0).Cmp(tempBigInt.Mod(&n, i)) == 0 {
+	// 		return false
+	// 	}
+	// }
 	return true
 }
 

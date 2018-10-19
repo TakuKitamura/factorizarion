@@ -2,7 +2,6 @@ package factorization
 
 import (
 	"errors"
-	"math"
 	"math/big"
 	"strconv"
 )
@@ -12,20 +11,26 @@ func UintIsPrime(n uint64) bool {
 		return false
 	} else if n == 2 {
 		return true
+	} else if n == 3 {
+		return true
 	} else if n%2 == 0 {
+		return false
+	} else if n%3 == 0 {
 		return false
 	} else {
 		// pass
 	}
 
-	sn := uint64(math.Sqrt(float64(n)))
+	i := uint64(5)
+	w := uint64(2)
 
-	for i := uint64(3); i <= sn; i += 2 {
+	for i*i <= n {
 		if n%i == 0 {
 			return false
 		}
+		i += w
+		w = 6 - w
 	}
-
 	return true
 
 }
