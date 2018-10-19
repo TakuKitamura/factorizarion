@@ -22,7 +22,7 @@ func main() {
 
 	bigInt := new(big.Int)
 	bigInt, ok := bigInt.SetString(args[1], 10)
-	if !ok {
+	if !ok || big.NewInt(0).Cmp(bigInt) != -1 {
 		log.Fatal("invalid integer.")
 		os.Exit(1)
 	}
