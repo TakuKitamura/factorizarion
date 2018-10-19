@@ -9,16 +9,10 @@ import (
 func UintIsPrime(n uint64) bool {
 	if n < 2 {
 		return false
-	} else if n == 2 {
+	} else if n == 2 || n == 3 {
 		return true
-	} else if n == 3 {
-		return true
-	} else if n%2 == 0 {
+	} else if n%2 == 0 || n%3 == 0 {
 		return false
-	} else if n%3 == 0 {
-		return false
-	} else {
-		// pass
 	}
 
 	i := uint64(5)

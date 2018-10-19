@@ -10,16 +10,10 @@ func BigintIsPrime(n big.Int) bool {
 
 	if n.Cmp(big.NewInt(2)) == -1 { // n < 2
 		return false
-	} else if n.Cmp(big.NewInt(2)) == 0 { //n == 2
+	} else if n.Cmp(big.NewInt(2)) == 0 || n.Cmp(big.NewInt(3)) == 0 { //n == 2
 		return true
-	} else if n.Cmp(big.NewInt(3)) == 0 { //n == 3
-		return true
-	} else if big.NewInt(0).Cmp(tempBigInt.Mod(&n, big.NewInt(2))) == 0 { // n % 2 == 0
+	} else if big.NewInt(0).Cmp(tempBigInt.Mod(&n, big.NewInt(2))) == 0 || big.NewInt(0).Cmp(tempBigInt.Mod(&n, big.NewInt(3))) == 0 { // n % 2 == 0
 		return false
-	} else if big.NewInt(0).Cmp(tempBigInt.Mod(&n, big.NewInt(3))) == 0 { // n % 2 == 0
-		return false
-	} else {
-		// pass
 	}
 
 	i := big.NewInt(5)
